@@ -1,11 +1,11 @@
-import { Trade, Price } from './types';
+import { Trade, Price } from '../types';
 import {
   BINANCE_API_URL,
   BITFINEX_API_URL,
   HUOBI_API_URL,
   KRAKEN_API_URL,
   TRADES_LIMIT
-} from './constants';
+} from '../constants';
 
 export const fetchPriceBinance = async (pair: string): Promise<Price> => {
   const response = await fetch(`${BINANCE_API_URL}ticker/price?symbol=${pair}`);

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navbar, Container } from 'react-bootstrap';
 
-import { ApplicationState, User } from './types';
+import { ApplicationState, User } from '../types';
 
 const Header = () => {
   const user = useSelector<ApplicationState, User>(state => state.user);

@@ -6,15 +6,15 @@ import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import MarketTrades from './MarketTrades';
-import { ApplicationState, ExchangeState, Price } from './types';
+import { ApplicationState, ExchangeState, Price } from '../types';
 import {
   fetchPriceBinance,
   fetchPriceBitfinex,
   fetchPriceHuobi,
   fetchPriceKraken
-} from './exchanges.api';
+} from '../api';
 // import { setExchange } from './redux/actions';
-import { setExchange } from './redux/reducers';
+import { setExchange } from '../redux/reducers';
 
 const PricesGrid = () => {
   const {

@@ -1,29 +1,29 @@
-export type Trade = {
+export interface Trade {
   id: string,
   price: number,
   amount: number,
   time?: string,
   isBuyerMaker?: boolean
-};
+}
 
-export type Price = {
+export interface Price {
   id: string,
   exchange: string,
   price: number
-};
+}
 
-export type User = {
+export interface User {
   id: string,
   name: string,
   email?: string,
 }
 
-export type ExchangeState = {
+export interface ExchangeState {
   selectedExchange: string,
   cryptocurrencyPair: string
-};
+}
 
-export type ApplicationState = {
+export interface ApplicationState {
   user: User,
   exchange: ExchangeState,
-};
+}

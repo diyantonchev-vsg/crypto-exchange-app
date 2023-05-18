@@ -8,10 +8,10 @@ import {
   Col
 } from 'react-bootstrap'
 
-import Search from './Search';
-import PricesGrid from './PricesGrid';
+import Search from '../components/Search';
+import PricesGrid from '../components/PricesGrid';
 
-import { setCryptocurrencyPair } from './redux/reducers';
+import { setCryptocurrencyPair } from '../redux/reducers';
 // import { setCryptocurrencyPair } from './redux/actions';
 
 const Home = () => {

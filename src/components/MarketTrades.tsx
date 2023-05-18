@@ -1,35 +1,18 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Container, Row, Col } from 'react-bootstrap'
 
 // import { setCryptocurrencyPair } from './redux/actions';
-import { setCryptocurrencyPair } from './redux/reducers';
+import { setCryptocurrencyPair } from '../redux/reducers';
 import {
   fetchTradesBinance,
   fetchTradesBitfinex,
   fetchTradesHuobi,
   fetchTradesKraken
-} from './exchanges.api';
-import { EXCHANGES } from './constants';
-import { ApplicationState, ExchangeState, Trade } from './types';
-
-type GridWrapperProps = { children: React.ReactNode, wrapInContainer?: boolean };
-
-const GridWrapper = ({ children, wrapInContainer }: GridWrapperProps) => (
-  wrapInContainer ? (
-    <Container>
-      <Row className='justify-content-md-center mt-4'>
-        <Col xs='6'>
-          {children}
-        </Col>
-      </Row>
-    </Container>
-  ) : (
-    <>{children}</>
-  )
-);
+} from '../api';
+import { EXCHANGES } from '../constants';
+import { ApplicationState, ExchangeState, Trade } from '../types';
 
 const MarketTrades = () => {
   const {
@@ -41,10 +24,8 @@ const MarketTrades = () => {
 
   const dispatch = useDispatch();
   const { pair: pairUrlParams } = useParams();
-  const { pathname } = useLocation();
 
   const [first, second] = useMemo(() => cryptocurrencyPair ? cryptocurrencyPair.split(/\W/) : [], [cryptocurrencyPair]);
-  const isDetailsPage = useMemo(() => pathname?.split(/\W/)?.includes('details'), [pathname]);
 
   const fetchData = async () => {
     const pair = cryptocurrencyPair?.replace(/\W/, '');
@@ -132,25 +113,18 @@ const MarketTrades = () => {
   ];
 
   return (
-    <>
-      {isDetailsPage && <h3 className='mt-4 text-center'>Market Trades</h3>}
-      <GridWrapper wrapInContainer={isDetailsPage}>
-        <div style={{ height: 380, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 5
-                },
-              },
-            }}
-            disableRowSelectionOnClick
-          />
-        </div>
-      </GridWrapper>
-    </>
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 5
+          },
+        },
+      }}
+      disableRowSelectionOnClick
+    />
   );
 };
 

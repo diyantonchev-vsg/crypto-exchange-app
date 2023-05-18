@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap'
 
 // import { setCryptocurrencyPair } from './redux/actions';
-import { setCryptocurrencyPair } from './redux/reducers';
+import { setCryptocurrencyPair } from '../redux/reducers';
 
 const Search = () => {
   const [cryptoPair, setCryptoPair] = useState<string>('');

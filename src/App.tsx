@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 import {  useDispatch } from 'react-redux';
 
-import Header from './Header';
-import Home from './Home';
-import MarketTrades from './MarketTrades';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Details from './pages/Details';
 import { setUser } from './redux/reducers';
 // import { setUser } from './redux/actions';
 
-const ExchangeApp = () => {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const ExchangeApp = () => {
         />
         <Route
           path='/:pair/details'
-          element={<MarketTrades />}
+          element={<Details />}
         />
         <Route path='*' element={<Navigate to={{ pathname: '/' }} replace />} />
       </Routes>
@@ -42,5 +42,5 @@ const ExchangeApp = () => {
   );
 };
 
-ExchangeApp.displayName = 'ExchangeApp';
-export default ExchangeApp;
+App.displayName = 'ExchangeApp';
+export default App;
