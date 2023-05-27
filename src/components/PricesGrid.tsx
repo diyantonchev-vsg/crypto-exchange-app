@@ -10,7 +10,6 @@ import { ApplicationState, ExchangeState, Price } from '../types';
 import {
   fetchPriceBinance,
   fetchPriceBitfinex,
-  fetchPriceHuobi,
   fetchPriceKraken
 } from '../api';
 // import { setExchange } from './redux/actions';
@@ -35,7 +34,6 @@ const PricesGrid = () => {
       const data = await Promise.all([
         fetchPriceBinance(binancePair),
         fetchPriceBitfinex(pair),
-        fetchPriceHuobi(pair.toLowerCase()),
         fetchPriceKraken(pair)
       ]);
 
@@ -88,7 +86,6 @@ const PricesGrid = () => {
             (<a
               className='link-primary'
               role='button'
-              aria-hidden
               onClick={() => onPriceClick(row?.exchange)}
             >
               {second ? `1 ${first} = ${price} ${second}` : price}
@@ -106,13 +103,6 @@ const PricesGrid = () => {
         <DataGrid
           rows={rows}
           columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 4
-              },
-            },
-          }}
           disableRowSelectionOnClick
         />
       )}

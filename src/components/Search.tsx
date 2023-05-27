@@ -33,6 +33,7 @@ const Search = () => {
     <Form>
       <InputGroup>
         <FormControl
+          type='search'
           placeholder='Search cryptocurrency pair (e.g. BTC/USD)'
           onChange={onSearchTextChange}
           onKeyDown={handleKeyDown}
