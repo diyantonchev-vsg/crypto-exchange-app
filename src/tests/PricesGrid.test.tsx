@@ -1,5 +1,5 @@
 
-import { render, screen, findAllByRole } from 'test-utils';
+import { render, screen, findAllByRole, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 import mockServer from 'mock-server';
 import PricesGrid from '../components/PricesGrid';
@@ -8,12 +8,15 @@ import { setCryptocurrencyPair } from '../redux/reducers';
 
 describe('PricesGrid', () => { 
 
-  beforeAll(() => { 
-    mockServer.listen();
-    store.dispatch(setCryptocurrencyPair('BTC/USD'));
-  });
+  beforeAll(() => mockServer.listen());
 
-  afterEach(() => mockServer.resetHandlers());
+  beforeEach(async () => await waitFor(() => store.dispatch(setCryptocurrencyPair('BTC/USD'))));
+
+  afterEach(async () =>  {
+    mockServer.resetHandlers();
+
+    await waitFor(() => store.dispatch(setCryptocurrencyPair('')));
+  });
 
   afterAll(() => mockServer.close());
 
@@ -44,5 +47,13 @@ describe('PricesGrid', () => {
     await user.click(priceBtn);
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('should match the snapshot', async () => {
+    render(<PricesGrid />);
+
+    const grid = await screen.findByRole('grid');
+
+    expect(grid).toMatchSnapshot();
   });
 });

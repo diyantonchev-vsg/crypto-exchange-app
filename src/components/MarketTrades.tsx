@@ -123,6 +123,7 @@ const MarketTrades = () => {
           },
         },
       }}
+      pageSizeOptions={[5, 10, 25]}
       disableRowSelectionOnClick
     />
   );
